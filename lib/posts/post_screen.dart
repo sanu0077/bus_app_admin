@@ -25,33 +25,33 @@ class _PostScreenState extends State<PostScreen> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         centerTitle: true,
-        title: Text('Dashboard'),
+        title: const Text('Dashboard'),
         actions: [
           IconButton(
             onPressed: () {
               auth.signOut().then((value) {
                 Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(builder: (context) => LoginScreen()),
+                  MaterialPageRoute(builder: (context) => const LoginScreen()),
                 );
               }).catchError((error) {
                 Utils().toastMessage(context, error.toString());
               });
             },
-            icon: Icon(Icons.logout),
+            icon: const Icon(Icons.logout),
           ),
-          SizedBox(width: 10),
+          const SizedBox(width: 10),
         ],
       ),
       body: StreamBuilder<DatabaseEvent>(
         stream: ref.onValue,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else if (!snapshot.hasData || snapshot.data!.snapshot.value == null) {
-            return Center(child: Text('No data available.'));
+            return const Center(child: Text('No data available.'));
           } else {
             Map<dynamic, dynamic> map = snapshot.data!.snapshot.value as Map<dynamic, dynamic>;
             List<String> routeNames = map.keys.cast<String>().toList();
@@ -74,12 +74,12 @@ class _PostScreenState extends State<PostScreen> {
                     );
                   },
                   child: Container(
-                    margin: EdgeInsets.all(8.0),
-                    padding: EdgeInsets.all(16.0),
+                    margin: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(16.0),
                     decoration: BoxDecoration(
                       color: Colors.blue.shade100,
                       borderRadius: BorderRadius.circular(8.0),
-                      boxShadow: [
+                      boxShadow: const [
                         BoxShadow(
                           color: Colors.black26,
                           blurRadius: 4.0,
@@ -89,7 +89,7 @@ class _PostScreenState extends State<PostScreen> {
                     ),
                     child: Text(
                       routeName,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                       ),
@@ -110,11 +110,11 @@ class _PostScreenState extends State<PostScreen> {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => RealTimeDatabase()),
+                  MaterialPageRoute(builder: (context) => const RealTimeDatabase()),
                 );
               },
-              child: Icon(CupertinoIcons.add),
               heroTag: null,
+              child: const Icon(CupertinoIcons.add),
             ),
           ),
           Positioned(
@@ -124,11 +124,11 @@ class _PostScreenState extends State<PostScreen> {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => NotificationPage()), // Navigate to the new page
+                  MaterialPageRoute(builder: (context) => const NotificationPage()), // Navigate to the new page
                 );
               },
-              child: Icon(CupertinoIcons.bell),
               heroTag: null,
+              child: const Icon(CupertinoIcons.bell),
             ),
           ),
         ],

@@ -16,8 +16,8 @@ class _LoginWithPhoneNumberState extends State<LoginWithPhoneNumber> {
         centerTitle: true,
         backgroundColor: Theme.of(context).primaryColor,
       ),
-      body: Column(
-        children: const [
+      body: const Column(
+        children: [
 
         ],
       ),

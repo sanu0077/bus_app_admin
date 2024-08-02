@@ -23,8 +23,8 @@ class _RealTimeDatabaseState extends State<RealTimeDatabase> {
   final returnVisitPlaceController = TextEditingController();
   final databaseReference = FirebaseDatabase.instance.ref("Routes");
   final ImagePicker _picker = ImagePicker();
-  List<File> _busImages = [];
-  List<File> _routeImages = [];
+  final List<File> _busImages = [];
+  final List<File> _routeImages = [];
   List<Map<String, String>> visits = [];
   List<Map<String, String>> returnVisits = [];
 
@@ -44,8 +44,8 @@ class _RealTimeDatabaseState extends State<RealTimeDatabase> {
   }
 
   Future<void> pickBusImages() async {
-    final List<XFile>? pickedFiles = await _picker.pickMultiImage();
-    if (pickedFiles != null && pickedFiles.isNotEmpty) {
+    final List<XFile> pickedFiles = await _picker.pickMultiImage();
+    if (pickedFiles.isNotEmpty) {
       setState(() {
         _busImages.addAll(pickedFiles.map((pickedFile) => File(pickedFile.path)).toList());
       });
@@ -53,8 +53,8 @@ class _RealTimeDatabaseState extends State<RealTimeDatabase> {
   }
 
   Future<void> pickRouteImages() async {
-    final List<XFile>? pickedFiles = await _picker.pickMultiImage();
-    if (pickedFiles != null && pickedFiles.isNotEmpty) {
+    final List<XFile> pickedFiles = await _picker.pickMultiImage();
+    if (pickedFiles.isNotEmpty) {
       setState(() {
         _routeImages.addAll(pickedFiles.map((pickedFile) => File(pickedFile.path)).toList());
       });

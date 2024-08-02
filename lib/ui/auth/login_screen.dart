@@ -36,7 +36,7 @@ class _LoginScreenState extends State<LoginScreen> {
       password: passwordController.text,
     ).then((userCredential) {
       Navigator.push(context,
-       MaterialPageRoute(builder: (context) => PostScreen())
+       MaterialPageRoute(builder: (context) => const PostScreen())
        );
        setState(() {
       loading = false;
@@ -135,7 +135,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => SignupScreen(),
+                        builder: (context) => const SignupScreen(),
                       ),
                     );
                   },
@@ -146,7 +146,7 @@ class _LoginScreenState extends State<LoginScreen> {
             InkWell(
               onTap: (){
                 Navigator.push(context, 
-                MaterialPageRoute(builder: (context) => LoginWithPhoneNumber()));
+                MaterialPageRoute(builder: (context) => const LoginWithPhoneNumber()));
               },
               child: Container(
                 height: 50,  // Reduced height

@@ -3,6 +3,8 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:adm/utils/utils.dart';
 
 class NotificationPage extends StatefulWidget {
+  const NotificationPage({super.key});
+
   @override
   _NotificationPageState createState() => _NotificationPageState();
 }
@@ -35,11 +37,11 @@ class _NotificationPageState extends State<NotificationPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Manage Notifications'),
+        title: const Text('Manage Notifications'),
         actions: [
           IconButton(
             onPressed: _saveNotifications,
-            icon: Icon(Icons.save),
+            icon: const Icon(Icons.save),
           ),
         ],
       ),
@@ -53,27 +55,27 @@ class _NotificationPageState extends State<NotificationPage> {
                       itemCount: _notifications.length,
                       itemBuilder: (context, index) {
                         return Card(
-                          margin: EdgeInsets.symmetric(vertical: 8.0),
+                          margin: const EdgeInsets.symmetric(vertical: 8.0),
                           child: ListTile(
                             title: Text(_notifications[index]),
                           ),
                         );
                       },
                     )
-                  : Center(child: Text('No notifications added')),
+                  : const Center(child: Text('No notifications added')),
             ),
             TextField(
               controller: _textController,
               maxLines: 3, // Allow multiple lines
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Enter Notification',
                 border: OutlineInputBorder(),
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             ElevatedButton(
               onPressed: _addNotification,
-              child: Text('Add Notification'),
+              child: const Text('Add Notification'),
             ),
           ],
         ),

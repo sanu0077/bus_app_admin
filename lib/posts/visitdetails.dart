@@ -8,7 +8,7 @@ class VisitDetailsScreen extends StatelessWidget {
   final String busName;
   final String routeName;
 
-  VisitDetailsScreen({required this.busName, required this.routeName});
+  const VisitDetailsScreen({super.key, required this.busName, required this.routeName});
 
   // Function to pick and upload an image
   Future<void> _uploadImage(BuildContext context) async {
@@ -47,14 +47,14 @@ class VisitDetailsScreen extends StatelessWidget {
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            TextField(controller: timeController, decoration: InputDecoration(labelText: 'Visit Time')),
-            TextField(controller: placeController, decoration: InputDecoration(labelText: 'Visit Place')),
+            TextField(controller: timeController, decoration: const InputDecoration(labelText: 'Visit Time')),
+            TextField(controller: placeController, decoration: const InputDecoration(labelText: 'Visit Place')),
           ],
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: Text('Cancel'),
+            child: const Text('Cancel'),
           ),
           TextButton(
             onPressed: () {
@@ -67,7 +67,7 @@ class VisitDetailsScreen extends StatelessWidget {
 
               Navigator.pop(context);
             },
-            child: Text('Save'),
+            child: const Text('Save'),
           ),
         ],
       ),
@@ -83,7 +83,7 @@ class VisitDetailsScreen extends StatelessWidget {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: Text('Cancel'),
+            child: const Text('Cancel'),
           ),
           TextButton(
             onPressed: () {
@@ -92,7 +92,7 @@ class VisitDetailsScreen extends StatelessWidget {
               ref.child(visitKey).remove();
               Navigator.pop(context);
             },
-            child: Text('Delete'),
+            child: const Text('Delete'),
           ),
         ],
       ),
@@ -110,14 +110,14 @@ class VisitDetailsScreen extends StatelessWidget {
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            TextField(controller: timeController, decoration: InputDecoration(labelText: 'Visit Time')),
-            TextField(controller: placeController, decoration: InputDecoration(labelText: 'Visit Place')),
+            TextField(controller: timeController, decoration: const InputDecoration(labelText: 'Visit Time')),
+            TextField(controller: placeController, decoration: const InputDecoration(labelText: 'Visit Place')),
           ],
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: Text('Cancel'),
+            child: const Text('Cancel'),
           ),
           TextButton(
             onPressed: () {
@@ -130,7 +130,7 @@ class VisitDetailsScreen extends StatelessWidget {
 
               Navigator.pop(context);
             },
-            child: Text('Add'),
+            child: const Text('Add'),
           ),
         ],
       ),
@@ -144,15 +144,15 @@ class VisitDetailsScreen extends StatelessWidget {
         title: Text('Visits for $busName'),
         actions: [
           IconButton(
-            icon: Icon(Icons.add),
+            icon: const Icon(Icons.add),
             onPressed: () => _addVisit(context, false),
           ),
           IconButton(
-            icon: Icon(Icons.add),
+            icon: const Icon(Icons.add),
             onPressed: () => _addVisit(context, true),
           ),
           IconButton(
-            icon: Icon(Icons.upload_file),
+            icon: const Icon(Icons.upload_file),
             onPressed: () => _uploadImage(context),
           ),
         ],
@@ -164,7 +164,7 @@ class VisitDetailsScreen extends StatelessWidget {
               stream: FirebaseDatabase.instance.ref('Routes/$routeName/$busName/images').onValue,
               builder: (context, AsyncSnapshot<DatabaseEvent> snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Center(child: CircularProgressIndicator());
+                  return const Center(child: CircularProgressIndicator());
                 } else if (snapshot.hasError) {
                   return Center(child: Text('Error: ${snapshot.error}'));
                 } else if (snapshot.hasData && snapshot.data!.snapshot.value != null) {
@@ -193,7 +193,7 @@ class VisitDetailsScreen extends StatelessWidget {
                                 stream: FirebaseDatabase.instance.ref('Routes/$routeName/$busName/visits').onValue,
                                 builder: (context, AsyncSnapshot<DatabaseEvent> snapshot) {
                                   if (snapshot.connectionState == ConnectionState.waiting) {
-                                    return Center(child: CircularProgressIndicator());
+                                    return const Center(child: CircularProgressIndicator());
                                   } else if (snapshot.hasError) {
                                     return Center(child: Text('Error: ${snapshot.error}'));
                                   } else if (snapshot.hasData && snapshot.data!.snapshot.value != null) {
@@ -217,14 +217,14 @@ class VisitDetailsScreen extends StatelessWidget {
                                           subtitle: Text('Time: ${visit['visitTime']}'),
                                           onTap: () => _editVisit(context, visit['visitKey'] ?? '', visits[visit['visitKey']], false),
                                           trailing: IconButton(
-                                            icon: Icon(Icons.delete),
+                                            icon: const Icon(Icons.delete),
                                             onPressed: () => _deleteVisit(context, visit['visitKey'] ?? '', false),
                                           ),
                                         );
                                       },
                                     );
                                   } else {
-                                    return Center(child: Text('No visits available.'));
+                                    return const Center(child: Text('No visits available.'));
                                   }
                                 },
                               ),
@@ -234,7 +234,7 @@ class VisitDetailsScreen extends StatelessWidget {
                                 stream: FirebaseDatabase.instance.ref('Routes/$routeName/$busName/returnVisits').onValue,
                                 builder: (context, AsyncSnapshot<DatabaseEvent> snapshot) {
                                   if (snapshot.connectionState == ConnectionState.waiting) {
-                                    return Center(child: CircularProgressIndicator());
+                                    return const Center(child: CircularProgressIndicator());
                                   } else if (snapshot.hasError) {
                                     return Center(child: Text('Error: ${snapshot.error}'));
                                   } else if (snapshot.hasData && snapshot.data!.snapshot.value != null) {
@@ -258,14 +258,14 @@ class VisitDetailsScreen extends StatelessWidget {
                                           subtitle: Text('Return Time: ${visit['visitTime']}'),
                                           onTap: () => _editVisit(context, visit['visitKey'] ?? '', returnVisits[visit['visitKey']], true),
                                           trailing: IconButton(
-                                            icon: Icon(Icons.delete),
+                                            icon: const Icon(Icons.delete),
                                             onPressed: () => _deleteVisit(context, visit['visitKey'] ?? '', true),
                                           ),
                                         );
                                       },
                                     );
                                   } else {
-                                    return Center(child: Text('No return visits available.'));
+                                    return const Center(child: Text('No return visits available.'));
                                   }
                                 },
                               ),
@@ -276,7 +276,7 @@ class VisitDetailsScreen extends StatelessWidget {
                     ],
                   );
                 } else {
-                  return Center(child: Text('No images available.'));
+                  return const Center(child: Text('No images available.'));
                 }
               },
             ),

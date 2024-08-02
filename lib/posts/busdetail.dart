@@ -7,7 +7,7 @@ class BusDetailsScreen extends StatefulWidget {
   final String routeName;
   final Map<dynamic, dynamic> buses;
 
-  BusDetailsScreen({required this.routeName, required this.buses});
+  const BusDetailsScreen({super.key, required this.routeName, required this.buses});
 
   @override
   _BusDetailsScreenState createState() => _BusDetailsScreenState();
@@ -31,20 +31,20 @@ class _BusDetailsScreenState extends State<BusDetailsScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text('Edit Bus Details'),
+        title: const Text('Edit Bus Details'),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            TextField(controller: nameController, decoration: InputDecoration(labelText: 'Bus Name')),
-            TextField(controller: timeController, decoration: InputDecoration(labelText: 'Bus Time')),
-            TextField(controller: returnTimeController, decoration: InputDecoration(labelText: 'Bus Return Time')),
-            TextField(controller: mobileController, decoration: InputDecoration(labelText: 'Mobile Number')),
+            TextField(controller: nameController, decoration: const InputDecoration(labelText: 'Bus Name')),
+            TextField(controller: timeController, decoration: const InputDecoration(labelText: 'Bus Time')),
+            TextField(controller: returnTimeController, decoration: const InputDecoration(labelText: 'Bus Return Time')),
+            TextField(controller: mobileController, decoration: const InputDecoration(labelText: 'Mobile Number')),
           ],
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: Text('Cancel'),
+            child: const Text('Cancel'),
           ),
           TextButton(
             onPressed: () {
@@ -59,7 +59,7 @@ class _BusDetailsScreenState extends State<BusDetailsScreen> {
 
               Navigator.pop(context);
             },
-            child: Text('Save'),
+            child: const Text('Save'),
           ),
         ],
       ),
@@ -70,12 +70,12 @@ class _BusDetailsScreenState extends State<BusDetailsScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text('Delete Bus'),
-        content: Text('Are you sure you want to delete this bus?'),
+        title: const Text('Delete Bus'),
+        content: const Text('Are you sure you want to delete this bus?'),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: Text('Cancel'),
+            child: const Text('Cancel'),
           ),
           TextButton(
             onPressed: () {
@@ -83,7 +83,7 @@ class _BusDetailsScreenState extends State<BusDetailsScreen> {
               _busRef.child(busName).remove();
               Navigator.pop(context);
             },
-            child: Text('Delete'),
+            child: const Text('Delete'),
           ),
         ],
       ),
@@ -99,20 +99,20 @@ class _BusDetailsScreenState extends State<BusDetailsScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text('Add New Bus'),
+        title: const Text('Add New Bus'),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            TextField(controller: nameController, decoration: InputDecoration(labelText: 'Bus Name')),
-            TextField(controller: timeController, decoration: InputDecoration(labelText: 'Bus Time')),
-            TextField(controller: returnTimeController, decoration: InputDecoration(labelText: 'Bus Return Time')),
-            TextField(controller: mobileController, decoration: InputDecoration(labelText: 'Mobile Number')),
+            TextField(controller: nameController, decoration: const InputDecoration(labelText: 'Bus Name')),
+            TextField(controller: timeController, decoration: const InputDecoration(labelText: 'Bus Time')),
+            TextField(controller: returnTimeController, decoration: const InputDecoration(labelText: 'Bus Return Time')),
+            TextField(controller: mobileController, decoration: const InputDecoration(labelText: 'Mobile Number')),
           ],
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: Text('Cancel'),
+            child: const Text('Cancel'),
           ),
           TextButton(
             onPressed: () {
@@ -125,7 +125,7 @@ class _BusDetailsScreenState extends State<BusDetailsScreen> {
 
               Navigator.pop(context);
             },
-            child: Text('Add'),
+            child: const Text('Add'),
           ),
         ],
       ),
@@ -139,7 +139,7 @@ class _BusDetailsScreenState extends State<BusDetailsScreen> {
         title: Text(widget.routeName),
         actions: [
           IconButton(
-            icon: Icon(CupertinoIcons.add),
+            icon: const Icon(CupertinoIcons.add),
             onPressed: () => _addBus(context),
           ),
         ],
@@ -148,7 +148,7 @@ class _BusDetailsScreenState extends State<BusDetailsScreen> {
         stream: _busRef.onValue,
         builder: (context, AsyncSnapshot<DatabaseEvent> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else if (snapshot.hasData && snapshot.data!.snapshot.value != null) {
@@ -172,9 +172,9 @@ class _BusDetailsScreenState extends State<BusDetailsScreen> {
               itemBuilder: (context, index) {
                 var bus = busList[index];
                 return Card(
-                  margin: EdgeInsets.all(8.0),
+                  margin: const EdgeInsets.all(8.0),
                   child: ListTile(
-                    leading: Icon(CupertinoIcons.bus),
+                    leading: const Icon(CupertinoIcons.bus),
                     title: Text(bus['busName'] ?? 'Unknown'),
                     subtitle: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -199,11 +199,11 @@ class _BusDetailsScreenState extends State<BusDetailsScreen> {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         IconButton(
-                          icon: Icon(CupertinoIcons.pencil_ellipsis_rectangle),
+                          icon: const Icon(CupertinoIcons.pencil_ellipsis_rectangle),
                           onPressed: () => _editBus(context, bus['busName'] ?? '', buses[bus['busName']]!),
                         ),
                         IconButton(
-                          icon: Icon(CupertinoIcons.delete),
+                          icon: const Icon(CupertinoIcons.delete),
                           onPressed: () => _deleteBus(context, bus['busName'] ?? ''),
                         ),
                       ],
@@ -213,7 +213,7 @@ class _BusDetailsScreenState extends State<BusDetailsScreen> {
               },
             );
           } else {
-            return Center(child: Text('No buses available.'));
+            return const Center(child: Text('No buses available.'));
           }
         },
       ),
